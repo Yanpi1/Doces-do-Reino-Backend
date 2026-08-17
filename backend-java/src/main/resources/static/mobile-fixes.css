@@ -1,0 +1,165 @@
+/* ============================================
+   REINO GOURMET — Mobile Fixes v3
+   ============================================ */
+
+@media (max-width: 640px) {
+
+  /* ── Topbar ── */
+  .topbar {
+    flex-direction: column;
+    gap: .2rem;
+    padding: .5rem .75rem;
+    font-size: .75rem;
+    line-height: 1.4;
+  }
+  .topbar-sep { display: none; }
+
+  /* ── Header ── */
+  .header-inner {
+    padding: 0 1rem !important;
+    gap: .65rem;
+    height: 60px;
+  }
+  .logo-name  { font-size: 1.05rem; }
+  .logo-sub   { font-size: .62rem; }
+  .logo-icon  { font-size: 1.5rem; }
+  .logo-icon-wrap { width: 32px; height: 32px; }
+  .theme-toggle-btn { display: none; }
+  .cart-btn {
+    padding: .45rem .85rem;
+    font-size: .82rem;
+    gap: .35rem;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 3rem 1.5rem 2.75rem !important;
+    min-height: auto !important;
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+    margin-bottom: .7rem;
+  }
+  .hero-desc {
+    font-size: .95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  .hero-actions { gap: .65rem; }
+  .btn-hero, .btn-hero-outline {
+    padding: .7rem 1.35rem;
+    font-size: .88rem;
+  }
+
+  /* ── Benefícios ── */
+  .beneficio-item { padding: .85rem 1rem; gap: .75rem; }
+  .beneficio-item svg { width: 22px; height: 22px; flex-shrink: 0; }
+  .beneficio-item strong { font-size: .88rem; }
+  .beneficio-item p      { font-size: .78rem; }
+
+  /* ── Seções ── */
+  .section { padding: 2.5rem 1.25rem 2.75rem !important; }
+  .section-title { font-size: 1.55rem; }
+
+  /* ── Produtos ── */
+  .produtos-grid { grid-template-columns: repeat(2, 1fr); gap: .85rem; }
+  .produto-body  { padding: .85rem .85rem .5rem; min-height: 140px; }
+  .produto-nome  { font-size: .9rem; }
+  .produto-footer { padding: .6rem .85rem .85rem; }
+  .produto-preco { font-size: 1.1rem; }
+  .btn-add       { font-size: .78rem; padding: .5rem .75rem; }
+
+  /* ── Sobre: mostra logo no mobile ── */
+  .sobre-visual {
+    display: flex !important;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .sobre-img-wrap {
+    min-height: 180px !important;
+    height: 180px !important;
+    width: 180px;
+    border-radius: 50% !important;
+    overflow: hidden;
+  }
+  .sobre-img-placeholder {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+  }
+  .sobre-logo-img {
+    width: 180px !important;
+    height: 180px !important;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .sobre-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sobre-texto { text-align: center; }
+  .sobre-texto p { font-size: .92rem; line-height: 1.65; }
+
+  /* ── Cultos ── */
+  .cultos-grid-centered { grid-template-columns: 1fr; gap: .75rem; }
+  .culto-card { padding: 1rem 1.25rem; }
+
+  /* ── Entregas ── */
+  .entregas-card { padding: 1.35rem 1.1rem; }
+  .entregas-destaque { font-size: 1.2rem; }
+
+  /* ── Contato ── */
+  .contato-wpp-card { padding: 1.5rem 1rem; }
+
+  /* ── Modal checkout ── */
+  .modal {
+    padding: 1.5rem 1.1rem;
+    border-radius: 16px 16px 0 0;
+    max-height: 95vh;
+  }
+  .modal-overlay { align-items: flex-end; }
+  .contato-tipo-row { gap: .4rem; }
+  .contato-tipo-btn { padding: .5rem .65rem; font-size: .78rem; }
+
+  /* ── Carrinho ── */
+  .cart-panel {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    bottom: 0;
+    top: auto;
+    height: 80vh;
+  }
+
+  /* ── Footer ── */
+  .footer-top    { gap: 1.25rem; padding: 2rem 1.1rem 1.5rem; }
+  .footer-bottom { padding: .85rem 1.1rem; flex-direction: column; gap: .35rem; text-align: center; }
+  .footer-brand p { font-size: .82rem; }
+
+  /* ── Chat mobile: menor, sem borda branca, brilho dourado ── */
+  #rg-chat-fab { bottom: 18px; right: 18px; }
+  #rg-chat-tooltip { right: 22px; }
+
+  #rg-chat-box {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 86px !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 68vh !important;
+    max-height: calc(100svh - 110px) !important;
+    border: none !important;
+    box-shadow:
+      0 0 0 1px rgba(201,169,110,0.25),
+      0 0 32px 6px rgba(160,120,64,0.22),
+      0 16px 48px rgba(62,35,16,0.22) !important;
+    border-radius: 20px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .produtos-grid { grid-template-columns: 1fr; }
+  .btn-hero, .btn-hero-outline { width: 100%; justify-content: center; }
+  .hero-actions { flex-direction: column; }
+}

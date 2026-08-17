@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doces do Reino</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="shortcut icon" href="assets/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile-fixes.css">
+</head>
+<body>
+
+<!-- ====== TOP BAR ====== -->
+<div class="topbar">
+  <span>🎁 Projeto solidário — cada pedido faz a diferença!</span>
+  <span class="topbar-sep">|</span>
+  <span>📍 Qr 415 Cj 3 lote 26</span>
+</div>
+
+<!-- ====== HEADER ====== -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon-wrap" id="logoIconWrap">
+        <span class="logo-icon" id="logoIconEmoji">⛪</span>
+        <img id="logoIconImg" src="" alt="Logo" class="logo-img" style="display:none">
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Doces do Reino</span>
+        <span class="logo-sub">dindin &amp; bolo de pote</span>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#produtos" class="nav-link">Cardápio</a>
+      <a href="#sobre" class="nav-link">Sobre</a>
+      <a href="#entregas" class="nav-link">Entregas</a>
+      <a href="#contato" class="nav-link">Contato</a>
+    </nav>
+    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Mudar tema">
+      <span id="themeToggleIcon">🌙</span>
+    </button>
+    <button class="cart-btn" onclick="toggleCart()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Pedido
+      <span class="cart-badge" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">✨ Feitos com amor</p>
+    <h1>Sabor que transforma<br><span>e une pessoas</span></h1>
+    <p class="hero-desc">DinDins gourmet e Bolos de Pote artesanais.<br>Cada pedido contribui com uma causa especial.</p>
+    <div class="hero-actions">
+      <a href="#produtos" class="btn-hero">Ver Cardápio</a>
+      <a href="#sobre" class="btn-hero-outline">Saiba Mais</a>
+    </div>
+  </div>
+  <div class="hero-decor">
+    <div class="hero-circle c1"></div>
+    <div class="hero-circle c2"></div>
+    <div class="hero-float">🍫</div>
+    <div class="hero-float f2">🍓</div>
+    <div class="hero-float f3">🧁</div>
+  </div>
+</section>
+
+<!-- ====== BENEFICIOS ====== -->
+<section class="beneficios-bar">
+  <div class="beneficios-inner">
+    <div class="beneficio-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div><strong>Feito Artesanalmente</strong><p>Com ingredientes selecionados</p></div>
+    </div>
+    <div class="beneficio-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div><strong>Pedido Rápido</strong><p>Sem cadastro, só seu nome</p></div>
+    </div>
+    <div class="beneficio-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      <div><strong>Causa Solidária</strong><p>Seu pedido apoia a Doces do Reino</p></div>
+    </div>
+    <div class="beneficio-item">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <div><strong>Pague via Pix</strong><p>Rápido, seguro e sem taxas</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CARROSSEL ====== -->
+<section class="section carrossel-section" id="carrossel">
+  <div id="carrosselWrap" class="carrossel-wrap" style="display:none">
+    <div class="section-head">
+      <div>
+        <p class="section-eyebrow" id="carrosselEyebrow">Destaques</p>
+        <h2 class="section-title" id="carrosselTitulo">Em Destaque</h2>
+      </div>
+    </div>
+    <div class="carrossel-outer">
+      <div class="carrossel-viewport-wrap" style="position:relative;flex:1">
+        <button class="carrossel-btn prev" onclick="carrosselPrev()">&#8249;</button>
+        <div class="carrossel-viewport">
+          <div class="carrossel-track" id="carrosselTrack"></div>
+        </div>
+        <button class="carrossel-btn next" onclick="carrosselNext()">&#8250;</button>
+        <div class="carrossel-dots" id="carrosselDots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CARDÁPIO ====== -->
+<section class="section" id="produtos">
+  <div class="section-head">
+    <div>
+      <p class="section-eyebrow">O que temos</p>
+      <h2 class="section-title">Nosso Cardápio</h2>
+    </div>
+  </div>
+  <div class="produtos-grid" id="produtosGrid"></div>
+</section>
+
+<!-- ====== SOBRE ====== -->
+<section class="section sobre-section" id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-visual">
+      <div class="sobre-img-wrap" id="sobreImgWrap">
+        <div class="sobre-img-placeholder" id="sobrePlaceholder">
+          <div class="sobre-dots"></div>
+          <p class="sobre-placeholder-txt">Doces do Reino</p>
+        </div>
+        <img id="sobreLogoImg" src="" alt="Doces do Reino" class="sobre-logo-img" style="display:none">
+      </div>
+    </div>
+    <div class="sobre-texto">
+      <p class="section-eyebrow">Nossa história</p>
+      <h2 class="section-title" style="text-align:left">Sobre o Projeto</h2>
+      <p>Este projeto foi criado pela <strong>Igreja do Reino</strong> com o objetivo de arrecadar um determinado valor para um propósito maior. Encontramos neste formato uma maneira prática e acessível de mobilizar pessoas e tornar possível a realização desse objetivo.</p>
+      <p style="margin-top:.85rem">A iniciativa une organização, dedicação e colaboração, permitindo que cada contribuição faça parte de algo significativo. Mais do que um sistema de encomendas, este projeto representa um esforço coletivo em prol de uma causa maior.</p>
+    </div>
+  </div>
+
+  <!-- CULTOS — fora do grid, centralizado -->
+  <div class="cultos-section-centered">
+    <div class="cultos-grid-centered">
+      <div class="culto-card">
+        <div class="culto-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 3a3 3 0 00-3 3v12a3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3H6a3 3 0 00-3 3 3 3 0 003 3 3 3 0 003-3V6a3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3z"/></svg>
+        </div>
+        <strong>Domingo</strong>
+        <span>às 19h</span>
+      </div>
+      <div class="culto-card">
+        <div class="culto-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <strong>Quinta-feira</strong>
+        <span>às 19h30</span>
+      </div>
+      <div class="culto-card culto-card--endereco" onclick="abrirMapa()">
+        <div class="culto-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <strong>Endereço</strong>
+        <span>Qr 415 Cj 3 lote 26</span>
+        <span class="culto-tap-hint">Toque para ver no mapa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ENTREGAS ====== -->
+<section class="section entregas-section" id="entregas">
+  <div class="section-head centered">
+    <p class="section-eyebrow">Onde atendemos</p>
+    <h2 class="section-title">Entregas em Bras&iacute;lia</h2>
+  </div>
+  <div class="entregas-card">
+    <div class="entregas-badge">Atendimento local</div>
+    <p class="entregas-destaque">Fa&ccedil;o entregas somente em Bras&iacute;lia, com foco total em Samambaia.</p>
+    <p class="entregas-texto">Se voc&ecirc; est&aacute; em Samambaia, o atendimento recebe prioridade especial para facilitar a combina&ccedil;&atilde;o do pedido e da entrega.</p>
+    <div class="entregas-grid">
+      <div class="entrega-item">
+        <strong>Regi&atilde;o atendida</strong>
+        <span>Bras&iacute;lia - DF</span>
+      </div>
+      <div class="entrega-item entrega-item--foco">
+        <strong>Foco principal</strong>
+        <span>Samambaia</span>
+      </div>
+      <div class="entrega-item">
+        <strong>Combina&ccedil;&atilde;o</strong>
+        <span>Pedido e entrega alinhados pelo contato</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTATO ====== -->
+<section class="section contato-section" id="contato">
+  <div class="section-head centered">
+    <p class="section-eyebrow">Fale conosco</p>
+    <h2 class="section-title">Entre em Contato</h2>
+  </div>
+  <div id="contatoEmbed" class="contato-embed-area"></div>
+</section>
+
+<!-- ====== MODAL MAPA ====== -->
+<div class="modal-overlay" id="mapaModal">
+  <div class="modal mapa-modal">
+    <button class="close-btn modal-close" onclick="fecharMapa()">✕</button>
+    <h3 class="mapa-titulo">📍 Doces do Reino</h3>
+    <p class="mapa-endereco">Qr 415 Cj 3 lote 26 — Planaltina, DF</p>
+    <div class="mapa-container">
+      <iframe src="https://maps.google.com/maps?q=Qr+415+Cj+3+lote+26+Planaltina+DF+Brasil&output=embed&z=15"
+        width="100%" height="320" style="border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="mapa-actions">
+      <a href="https://www.google.com/maps/search/Qr+415+Cj+3+lote+26+Planaltina+DF" target="_blank" class="btn-primary" style="text-decoration:none;display:inline-block">
+        🗺️ Abrir no Google Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ====== CARRINHO ====== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>🛒 Seu Pedido</h3>
+    <button onclick="closeCartPanel()" class="close-btn">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">Seu carrinho está vazio 😅</p>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">Total: <strong id="cartTotal">R$ 0,00</strong></div>
+    <button class="btn-primary full" onclick="goToCheckout()">Finalizar Pedido →</button>
+  </div>
+</aside>
+
+<!-- ====== CHECKOUT MODAL ====== -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <button class="close-btn modal-close" onclick="closeCheckout()">✕</button>
+    <h2>Finalizar Pedido</h2>
+
+    <div id="checkoutStep1">
+      <label class="form-label">Seu nome</label>
+      <input type="text" id="clientName" class="form-input" placeholder="Ex: Ana Silva" maxlength="50">
+
+      <label class="form-label mt">Meio de contato <span style="color:var(--ouro)">*</span></label>
+      <div class="contato-tipo-row">
+        <button class="contato-tipo-btn active" id="btnContatoWpp" onclick="setContatoTipo('whatsapp')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </button>
+        <button class="contato-tipo-btn" id="btnContatoTel" onclick="setContatoTipo('telefone')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 12 19.79 19.79 0 011 3.18 2 2 0 012.99 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Telefone
+        </button>
+        <button class="contato-tipo-btn" id="btnContatoEmail" onclick="setContatoTipo('email')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          E-mail
+        </button>
+      </div>
+      <input type="text" id="clientContato" class="form-input mt-sm" placeholder="Ex: (61) 99999-9999">
+      <p class="form-hint">Para entrar em contato sobre o seu pedido 😊</p>
+      <button class="btn-primary full mt" onclick="goToPayment()">Ver Resumo →</button>
+    </div>
+
+    <div id="checkoutStep2" style="display:none">
+      <div class="resumo-pedido">
+        <h3>Resumo do Pedido</h3>
+        <div id="resumoItens"></div>
+        <div class="resumo-total"><span>Total</span><strong id="resumoTotal"></strong></div>
+      </div>
+      <div id="resumoContato" class="resumo-contato"></div>
+      <div class="pix-box">
+        <div class="pix-title">💸 Pagamento via Pix</div>
+        <p class="pix-hint">Após confirmar, realize o pagamento:</p>
+        <div class="pix-key-box">
+          <span id="pixKeyDisplay"></span>
+          <button class="copy-btn" onclick="copyPix()">📋 Copiar</button>
+        </div>
+        <p id="pixTipoDisplay" class="pix-tipo"></p>
+        <p id="pixNomeDisplay" class="pix-nome"></p>
+      </div>
+      <button class="btn-primary full mt" onclick="confirmarPedido()">✅ Confirmar Pedido</button>
+      <button class="btn-outline full mt-sm" onclick="backToStep1()">← Voltar</button>
+    </div>
+
+    <div id="checkoutStep3" style="display:none">
+      <div class="sucesso">
+        <div class="sucesso-icon">🎉</div>
+        <h3>Pedido Confirmado!</h3>
+        <p id="sucessoNome"></p>
+        <p>Realize o Pix e aguarde confirmação. Obrigado por apoiar a causa!</p>
+        <button class="btn-primary mt" onclick="closeCheckout()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo" id="footerLogoWrap">
+        <span id="footerLogoEmoji">⛪</span>
+        <img id="footerLogoImg" src="" alt="Logo" class="logo-img" style="display:none;width:28px;height:28px;object-fit:contain;border-radius:4px">
+        Doces do Reino
+      </div>
+      <p>Um projeto solidário da Doces do Reino para arrecadar e realizar.</p>
+    </div>
+    <div class="footer-info">
+      <h4>Contato</h4>
+      <p>📍 Qr 415 Cj 3 lote 26</p>
+      <p>📞 <a href="tel:6192796430">(61) 99279-6430</a></p>
+      <p>✉️ <a href="mailto:yanpietro0101@gmail.com">yanpietro0101@gmail.com</a></p>
+    </div>
+    <div class="footer-info">
+      <h4>Cultos</h4>
+      <p> Domingo — 19h</p>
+      <p> Quinta-feira — 19h30</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Doces do Reino. Todos os direitos reservados.</p>
+    <a href="admin.html" class="admin-link">Área Admin</a>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+
+<!-- ====== CHAT IA ====== -->
+
+
+
+<!-- ====== CHAT IA (inline) ====== -->
+<script>
+// ============================
+//  Doces do Reino — CHAT IA v2
+//  Corrigido: CORS, avatar, entrega, fechamento
+// ============================
+
+(function () {
+
+  // ── CSS ──────────────────────────────────────────────────
+  const style = document.createElement('style');
+  style.textContent = `
+    #rg-chat-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C9A96E 0%, #A07840 100%);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(160,120,64,0.45), 0 2px 8px rgba(0,0,0,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s;
+      outline: none;
+    }
+    #rg-chat-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 32px rgba(160,120,64,0.55), 0 4px 14px rgba(0,0,0,0.22);
+    }
+    #rg-chat-fab:active { transform: scale(.95); }
+    #rg-chat-fab svg { pointer-events: none; }
+
+    #rg-chat-fab::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,169,110,.5);
+      animation: rgPulse 2.6s ease-out infinite;
+    }
+    @keyframes rgPulse {
+      0%   { transform: scale(1);    opacity: .9; }
+      65%  { transform: scale(1.32); opacity: 0;  }
+      100% { transform: scale(1.32); opacity: 0;  }
+    }
+
+    #rg-chat-tooltip {
+      position: fixed;
+      bottom: 97px;
+      right: 32px;
+      background: #2C1A0E;
+      color: #FDFAF6;
+      font-family: var(--font-body,'Fredoka',sans-serif);
+      font-size: .82rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      pointer-events: none;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .22s, transform .22s;
+      z-index: 9998;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    #rg-chat-tooltip.visible { opacity:1; transform:translateY(0); }
+
+    #rg-chat-box {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      z-index: 9998;
+      width: 355px;
+      max-width: calc(100vw - 36px);
+      height: 515px;
+      max-height: calc(100svh - 115px);
+      background: var(--creme, #FDFAF6);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(62,35,16,0.18), 0 4px 20px rgba(0,0,0,0.10);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(.91) translateY(20px);
+      transform-origin: bottom right;
+      pointer-events: none;
+      transition: opacity .28s cubic-bezier(.4,0,.2,1),
+                  transform .28s cubic-bezier(.34,1.56,.64,1);
+      border: 1px solid var(--borda, #EAE0D5);
+    }
+    #rg-chat-box.open {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: all;
+    }
+
+    #rg-chat-header {
+      background: linear-gradient(135deg, #C9A96E 0%, #A07840 100%);
+      color: #fff;
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+    .rg-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .rg-hinfo { flex: 1; min-width: 0; }
+    .rg-hname {
+      font-family: var(--font-body,'Fredoka',sans-serif);
+      font-size: .98rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .rg-hstatus {
+      font-size: .72rem;
+      opacity: .9;
+      display: flex; align-items: center; gap: 5px;
+      margin-top: 2px;
+    }
+    .rg-hstatus::before {
+      content:'';
+      display:inline-block;
+      width:7px; height:7px;
+      border-radius:50%;
+      background:#7DFFA0;
+      flex-shrink:0;
+    }
+    #rg-chat-close {
+      background: rgba(255,255,255,.18);
+      border: none;
+      border-radius: 50%;
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: .95rem;
+      transition: background .18s;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    #rg-chat-close:hover { background: rgba(255,255,255,.32); }
+
+    #rg-chat-msgs {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 14px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      scroll-behavior: smooth;
+    }
+    #rg-chat-msgs::-webkit-scrollbar { width: 4px; }
+    #rg-chat-msgs::-webkit-scrollbar-thumb {
+      background: var(--borda,#EAE0D5);
+      border-radius: 4px;
+    }
+
+    .rg-msg {
+      max-width: 84%;
+      padding: 9px 13px;
+      border-radius: 16px;
+      font-family: var(--font-body,'Fredoka',sans-serif);
+      font-size: .875rem;
+      line-height: 1.5;
+      animation: rgIn .2s ease-out;
+      word-break: break-word;
+    }
+    @keyframes rgIn {
+      from { opacity:0; transform:translateY(7px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .rg-msg.bot {
+      background: var(--branco,#fff);
+      color: var(--texto,#2C1A0E);
+      border: 1px solid var(--borda,#EAE0D5);
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .rg-msg.user {
+      background: linear-gradient(135deg, #C9A96E 0%, #A07840 100%);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+      align-self: flex-end;
+    }
+
+    .rg-typing {
+      display: flex; align-items: center; gap: 5px;
+      padding: 10px 14px;
+      background: var(--branco,#fff);
+      border: 1px solid var(--borda,#EAE0D5);
+      border-radius: 16px; border-bottom-left-radius: 4px;
+      align-self: flex-start;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .rg-typing span {
+      width:7px; height:7px;
+      background: var(--ouro,#C9A96E);
+      border-radius: 50%;
+      animation: rgDot 1.2s ease-in-out infinite;
+    }
+    .rg-typing span:nth-child(2) { animation-delay:.18s; }
+    .rg-typing span:nth-child(3) { animation-delay:.36s; }
+    @keyframes rgDot {
+      0%,80%,100% { transform:scale(.7); opacity:.45; }
+      40%          { transform:scale(1);  opacity:1;   }
+    }
+
+    #rg-quick-replies {
+      padding: 5px 12px 3px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .rg-quick-btn {
+      background: var(--ouro-light,#F7F0E3);
+      color: var(--marrom,#6B4226);
+      border: 1px solid rgba(201,169,110,.55);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-family: var(--font-body,'Fredoka',sans-serif);
+      font-size: .78rem;
+      cursor: pointer;
+      transition: background .15s, color .15s, transform .12s;
+      white-space: nowrap;
+    }
+    .rg-quick-btn:hover {
+      background: var(--ouro,#C9A96E);
+      color: #fff;
+      transform: scale(1.04);
+    }
+    .rg-quick-btn:active { transform: scale(.96); }
+
+    #rg-chat-input-row {
+      padding: 9px 11px 11px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      border-top: 1px solid var(--borda,#EAE0D5);
+      background: var(--creme,#FDFAF6);
+      flex-shrink: 0;
+    }
+    #rg-chat-input {
+      flex: 1;
+      background: var(--branco,#fff);
+      border: 1.5px solid var(--borda,#EAE0D5);
+      border-radius: 13px;
+      padding: 9px 12px;
+      font-family: var(--font-body,'Fredoka',sans-serif);
+      font-size: .875rem;
+      color: var(--texto,#2C1A0E);
+      resize: none;
+      outline: none;
+      min-height: 38px;
+      max-height: 88px;
+      overflow-y: auto;
+      transition: border-color .18s;
+      line-height: 1.45;
+    }
+    #rg-chat-input:focus { border-color: var(--ouro,#C9A96E); }
+    #rg-chat-input::placeholder { color: #A08868; opacity:.75; }
+    #rg-chat-send {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, #C9A96E 0%, #A07840 100%);
+      border: none;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      flex-shrink: 0;
+      transition: transform .14s, box-shadow .14s;
+      box-shadow: 0 2px 8px rgba(160,120,64,.38);
+    }
+    #rg-chat-send:hover { transform: scale(1.08); }
+    #rg-chat-send:active { transform: scale(.93); }
+    #rg-chat-send:disabled { opacity: .45; cursor: default; transform: none !important; }
+
+    [data-theme="dark"] #rg-chat-box {
+      background: var(--creme,#171311);
+      border-color: var(--borda,#3A2B21);
+    }
+    [data-theme="dark"] .rg-msg.bot {
+      background: var(--branco,#221A16);
+      border-color: var(--borda,#3A2B21);
+      color: var(--texto,#F5E9D6);
+    }
+    [data-theme="dark"] #rg-chat-input-row {
+      background: var(--creme,#171311);
+      border-color: var(--borda,#3A2B21);
+    }
+    [data-theme="dark"] #rg-chat-input {
+      background: var(--branco,#221A16);
+      color: var(--texto,#F5E9D6);
+      border-color: var(--borda,#3A2B21);
+    }
+    [data-theme="dark"] #rg-chat-input::placeholder { color: #8A6E58; }
+    [data-theme="dark"] #rg-chat-tooltip {
+      background: #221A16;
+      color: #F5E9D6;
+    }
+    [data-theme="dark"] .rg-quick-btn {
+      background: #2A1E16;
+      color: #D4B87A;
+      border-color: rgba(212,184,122,.35);
+    }
+    [data-theme="dark"] .rg-quick-btn:hover {
+      background: #A07840;
+      color: #fff;
+    }
+
+    @media (max-width: 480px) {
+      #rg-chat-box {
+        bottom: 88px; right: 10px; left: 10px;
+        width: auto; max-width: none;
+        height: calc(100svh - 110px);
+      }
+      #rg-chat-fab { bottom: 20px; right: 18px; }
+      #rg-chat-tooltip { right: 18px; bottom: 84px; }
+    }
+
+    /* ── Botão flutuante iFood ───────────────────────────── */
+    #rg-ifood-fab {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #EA1D2C;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 18px 12px 12px;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: var(--font-body,'Fredoka',sans-serif);
+      font-weight: 600;
+      font-size: .92rem;
+      box-shadow: 0 4px 20px rgba(234,29,44,0.45), 0 2px 8px rgba(0,0,0,0.18);
+      transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s;
+    }
+    #rg-ifood-fab:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 32px rgba(234,29,44,0.55), 0 4px 14px rgba(0,0,0,0.22);
+    }
+    #rg-ifood-fab:active { transform: scale(.95); }
+    #rg-ifood-fab .rg-ifood-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #rg-ifood-fab .rg-ifood-icon svg { display:block; }
+    @media (max-width: 640px) {
+      #rg-ifood-fab {
+        bottom: 18px;
+        left: 18px;
+        width: 54px;
+        height: 54px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+      }
+      #rg-ifood-fab span.rg-ifood-label { display: none; }
+      #rg-ifood-fab .rg-ifood-icon { width: 100%; height: 100%; background: transparent; }
+      #rg-ifood-fab .rg-ifood-icon svg { width: 28px; height: 28px; }
+    }
+    @media (max-width: 380px) {
+      #rg-ifood-fab { width: 48px; height: 48px; bottom: 16px; left: 14px; }
+      #rg-ifood-fab .rg-ifood-icon svg { width: 24px; height: 24px; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // ── HTML ─────────────────────────────────────────────────
+  const wrap = document.createElement('div');
+  wrap.innerHTML = `
+    <a id="rg-ifood-fab" href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" aria-label="Peça pelo iFood" title="Peça pelo iFood">
+      <span class="rg-ifood-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 10.5C4 6.9 6.9 4 10.5 4h3C17.1 4 20 6.9 20 10.5S17.1 17 13.5 17h-3C6.9 17 4 14.1 4 10.5z" fill="#EA1D2C"/>
+          <circle cx="12" cy="10.5" r="3.2" fill="#fff"/>
+          <path d="M9 19.5c0-.9 1.34-1.5 3-1.5s3 .6 3 1.5-1.34 1.5-3 1.5-3-.6-3-1.5z" fill="#EA1D2C"/>
+        </svg>
+      </span>
+      <span class="rg-ifood-label">Peça pelo iFood</span>
+    </a>
+
+    <div id="rg-chat-tooltip">Posso ajudar com seu pedido? 😊</div>
+
+    <button id="rg-chat-fab" aria-label="Abrir assistente Doces do Reino" title="Falar com a Assistente">
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        <circle cx="9"  cy="10" r=".9" fill="#fff" stroke="none"/>
+        <circle cx="12" cy="10" r=".9" fill="#fff" stroke="none"/>
+        <circle cx="15" cy="10" r=".9" fill="#fff" stroke="none"/>
+      </svg>
+    </button>
+
+    <div id="rg-chat-box" role="dialog" aria-label="Assistente Doces do Reino">
+      <div id="rg-chat-header">
+        <div class="rg-avatar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="rg-hinfo">
+          <div class="rg-hname">Assistente Doces do Reino</div>
+          <div class="rg-hstatus">Online agora</div>
+        </div>
+        <button id="rg-chat-close" aria-label="Fechar">✕</button>
+      </div>
+      <div id="rg-chat-msgs"></div>
+      <div id="rg-quick-replies"></div>
+      <div id="rg-chat-input-row">
+        <textarea id="rg-chat-input" placeholder="Escreva sua mensagem..." rows="1" maxlength="500"></textarea>
+        <button id="rg-chat-send" aria-label="Enviar">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(wrap);
+
+  // ── Referências ──────────────────────────────────────────
+  const fab      = document.getElementById('rg-chat-fab');
+  const box      = document.getElementById('rg-chat-box');
+  const closeBtn = document.getElementById('rg-chat-close');
+  const msgsEl   = document.getElementById('rg-chat-msgs');
+  const inputEl  = document.getElementById('rg-chat-input');
+  const sendBtn  = document.getElementById('rg-chat-send');
+  const quickEl  = document.getElementById('rg-quick-replies');
+  const tooltip  = document.getElementById('rg-chat-tooltip');
+
+  // Caminho do proxy PHP no seu servidor
+  const PROXY_URL = 'https://project-l4g6v.vercel.app/api/chat-proxy';
+
+  let isOpen   = false;
+  let isTyping = false;
+  let history  = [];
+  let tooltipTimer;
+
+  const QUICK_INITIAL = [
+    '🍫 Ver produtos',
+    '📦 Como pedir?',
+    '🚚 Área de entrega',
+    '💸 Formas de pagamento',
+    '📞 Falar no WhatsApp',
+  ];
+
+  // ── Abrir / fechar ───────────────────────────────────────
+  function openChat() {
+    isOpen = true;
+    box.classList.add('open');
+    fab.setAttribute('aria-expanded', 'true');
+    tooltip.classList.remove('visible');
+    clearTimeout(tooltipTimer);
+    if (msgsEl.children.length === 0) initChat();
+    setTimeout(() => inputEl.focus(), 320);
+  }
+
+  function closeChat() {
+    isOpen = false;
+    box.classList.remove('open');
+    fab.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleChat() { isOpen ? closeChat() : openChat(); }
+
+  function initChat() {
+    addMsg('bot', '👋 Olá! Sou a assistente virtual da **Doces do Reino**.\nComo posso te ajudar hoje?');
+    setQuickReplies(QUICK_INITIAL);
+  }
+
+  // ── Mensagens ────────────────────────────────────────────
+  function addMsg(role, text) {
+    const el = document.createElement('div');
+    el.className = 'rg-msg ' + role;
+    el.innerHTML = formatText(text);
+    msgsEl.appendChild(el);
+    scrollBottom();
+    return el;
+  }
+
+  function formatText(t) {
+    return t
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\n/g,'<br>');
+  }
+
+  function scrollBottom() {
+    setTimeout(() => { msgsEl.scrollTop = msgsEl.scrollHeight; }, 30);
+  }
+
+  function showTyping() {
+    removeTyping();
+    const el = document.createElement('div');
+    el.className = 'rg-typing';
+    el.id = 'rg-typing-ind';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    msgsEl.appendChild(el);
+    scrollBottom();
+  }
+
+  function removeTyping() {
+    document.getElementById('rg-typing-ind')?.remove();
+  }
+
+  function setQuickReplies(items) {
+    quickEl.innerHTML = '';
+    if (!items || !items.length) return;
+    items.forEach(label => {
+      const btn = document.createElement('button');
+      btn.className = 'rg-quick-btn';
+      btn.textContent = label;
+      btn.addEventListener('click', () => sendMessage(label));
+      quickEl.appendChild(btn);
+    });
+  }
+
+  function clearQuickReplies() { quickEl.innerHTML = ''; }
+
+  // ── Envio ────────────────────────────────────────────────
+  async function sendMessage(text) {
+    text = (text || inputEl.value).trim();
+    if (!text || isTyping) return;
+
+    clearQuickReplies();
+    addMsg('user', text);
+    inputEl.value = '';
+    autoResize();
+
+    history.push({ role: 'user', content: text });
+    isTyping   = true;
+    sendBtn.disabled = true;
+    showTyping();
+
+    // Resposta local instantânea
+    const local = localAnswer(text);
+    if (local) {
+      await delay(500);
+      removeTyping();
+      addMsg('bot', local.reply);
+      history.push({ role: 'assistant', content: local.reply });
+      setQuickReplies(local.actions?.length ? local.actions : ['🍫 Produtos', '📦 Como pedir?', '📞 WhatsApp']);
+      isTyping = false;
+      sendBtn.disabled = false;
+      return;
+    }
+
+    // Proxy PHP → API Anthropic
+    try {
+      const res = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history.slice(-14) }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'HTTP ' + res.status);
+      }
+
+      const data = await res.json();
+      removeTyping();
+
+      const reply = (data.content || []).find(b => b.type === 'text')?.text
+        || 'Desculpe, não consegui processar sua mensagem. Fale pelo WhatsApp! 😊';
+
+      addMsg('bot', reply);
+      history.push({ role: 'assistant', content: reply });
+      setQuickReplies(['🍫 Produtos', '📦 Como pedir?', '📞 WhatsApp']);
+
+    } catch (err) {
+      removeTyping();
+      console.error('[RG Chat]', err.message);
+      addMsg('bot', '⚠️ Dificuldade de conexão no momento.\n\nFale diretamente pelo WhatsApp: **(61) 99279-6430** 📱');
+      setQuickReplies(['📞 Abrir WhatsApp']);
+    }
+
+    isTyping = false;
+    sendBtn.disabled = false;
+  }
+
+  // ── Respostas locais ─────────────────────────────────────
+  function localAnswer(text) {
+    const t = text.toLowerCase().trim();
+
+    // Saudações simples
+    if (/^(oi|ol[aá]|hey|hello|hi|bom dia|boa tarde|boa noite|tudo|e a[ií]|eai|oie|opa)[\s!?.,]*$/i.test(t)) {
+      return {
+        reply: 'Olá! Que bom ter você aqui! 😊\n\nSou a assistente da **Doces do Reino**. Como posso ajudar você hoje?',
+        actions: QUICK_INITIAL
+      };
+    }
+
+    // Produtos — resposta removida para a IA usar os dados reais do cardápio
+
+    // Como pedir
+    if (/pedir|comprar|pedido|carrinho|como fa[cç]|como pedir|quero pedir/i.test(t)) {
+      return {
+        reply: '🛒 É bem simples:\n\n1. Clique em **"Ver Cardápio"** no menu\n2. Escolha os produtos e adicione ao carrinho\n3. Clique no ícone de carrinho 🛒\n4. Informe nome e contato\n5. Pague via **Pix** e aguarde! 🎉',
+        actions: ['💸 Pagamento', '🚚 Entrega', '📞 WhatsApp']
+      };
+    }
+
+    // Entrega
+    if (/entreg|regi[aã]o|[aá]rea|atend|samambaia|bras[ií]lia|cidade|onde|local/i.test(t)) {
+      return {
+        reply: '🚚 Fazemos entregas em **Brasília - DF**, com foco principal em **Samambaia**.\n\nHorário e local de entrega são combinados pelo contato após o pedido. 📍',
+        actions: ['📞 WhatsApp', '🛒 Como pedir?']
+      };
+    }
+
+    // Pagamento
+    if (/pagament|pix|dinheiro|forma|pagar|cart[aã]o|transfer/i.test(t)) {
+      return {
+        reply: '💸 Aceitamos pagamento via **Pix**.\n\nAo finalizar o pedido, a chave Pix aparece automaticamente na tela. Rápido e seguro! 🔒',
+        actions: ['🛒 Como pedir?', '📞 WhatsApp']
+      };
+    }
+
+    // WhatsApp
+    if (/whatsapp|wpp|zap|telefone|ligar|contato|falar|n[uú]mero|tel/i.test(t) || t === '📞 falar no whatsapp' || t === '📞 abrir whatsapp') {
+      setTimeout(() => {
+        window.open('https://wa.me/5561992796430?text=Olá!%20Vi%20o%20site%20da%20Doces do Reino%20e%20gostaria%20de%20mais%20informações%20😊', '_blank');
+      }, 350);
+      return {
+        reply: '📱 Abrindo o WhatsApp agora!\n\nNosso número: **(61) 99279-6430**. Vai ser um prazer atender! 😊',
+        actions: ['🍫 Ver produtos', '🛒 Como pedir?']
+      };
+    }
+
+    // Preço
+    if (/pre[çc]o|quanto custa|quanto [eé]|valor|barato|caro/i.test(t)) {
+      return {
+        reply: 'Os preços ficam no **Cardápio** do site e podem variar por sabor e disponibilidade.\n\nClique em **"Ver Cardápio"** no menu para conferir! 😋',
+        actions: ['🛒 Como pedir?', '📞 WhatsApp']
+      };
+    }
+
+    // Projeto / causa
+    if (/projeto|causa|igreja|solid[aá]rio|doa[cç]|contribui/i.test(t)) {
+      return {
+        reply: '❤️ A Doces do Reino é um projeto solidário da **Igreja do Reino** em Brasília.\n\nTodo o lucro vai para uma causa especial. Cada pedido faz a diferença!',
+        actions: ['🍫 Ver produtos', '📞 WhatsApp']
+      };
+    }
+
+    return null; // vai para a IA
+  }
+
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function autoResize() {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 88) + 'px';
+  }
+
+  // ── Eventos ──────────────────────────────────────────────
+  fab.addEventListener('click', toggleChat);
+  closeBtn.addEventListener('click', closeChat); // SOMENTE o X fecha
+
+  sendBtn.addEventListener('click', () => sendMessage());
+  inputEl.addEventListener('input', autoResize);
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Tooltip após 3.5s
+  tooltipTimer = setTimeout(() => {
+    if (!isOpen) {
+      tooltip.classList.add('visible');
+      setTimeout(() => tooltip.classList.remove('visible'), 4500);
+    }
+  }, 3500);
+
+  // ── NÃO fecha ao clicar fora (removido intencionalmente) ─
+
+})();
+
+</script>
+</body>
+</html>
