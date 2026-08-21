@@ -3,8 +3,10 @@ services:
     build:
       context: ./backend-java
       dockerfile: Dockerfile
+
     container_name: doces_do_reino_web
     restart: unless-stopped
+
     environment:
       SUPABASE_DB_HOST: ${SUPABASE_DB_HOST}
       SUPABASE_DB_PORT: ${SUPABASE_DB_PORT:-5432}
@@ -12,6 +14,8 @@ services:
       SUPABASE_DB_USER: ${SUPABASE_DB_USER:-postgres}
       SUPABASE_DB_PASSWORD: ${SUPABASE_DB_PASSWORD}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
-      SERVER_PORT: 80
+      PORT: 8080
+
     ports:
-      - "8080:80"
+      - "8080:8080"
+      
