@@ -30,7 +30,7 @@ public class ChatProxyController {
     @Value("${groq.api.key:}")
         private String groqApiKey;
 
-    @Value("${groq.api.model:llama-3.3-70b-versatile}")
+    @Value("${groq.api.model:openai/gpt-oss-120b}")
         private String groqModel;
 
     @PostMapping("/api/chat-proxy.php")
