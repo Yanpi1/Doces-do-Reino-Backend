@@ -5,162 +5,207 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
-/**
- * ReinoGourmet — Proxy da API Google Gemini (reescrito em Java)
- * Equivalente ao antigo api/chat-proxy.php.
- */
 @RestController
+@CrossOrigin(
+        origins = "*",
+        allowedHeaders = "*",
+        methods = {
+                RequestMethod.POST,
+                RequestMethod.OPTIONS
+        }
+)
 public class ChatProxyController {
 
-    private final ObjectMapper mapper = new ObjectMapper();
-    private final HttpClient http = HttpClient.newBuilder()
-            .connectTimeout(Duration.ofSeconds(10))
-            .build();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${gemini.api.key:}")
-    private String geminiApiKey;
+    @Value("${groq.api.key:}")
+    private String groqApiKey;
 
-    @Value("${gemini.api.model:gemini-3.6-flash}")
-    private String geminiModel;
-
-    private static final String SYSTEM_PROMPT = """
-            Você é a assistente virtual da ReinoGourmet, um projeto solidário da Igreja do Reino em Brasília, DF.
-            Seu papel é ajudar clientes com dúvidas, apresentar produtos e incentivar pedidos de forma simpática e acolhedora.
-
-            PRODUTOS DISPONÍVEIS:
-            - DinDins Gourmet: picolés artesanais em vários sabores (chocolate, morango, maracujá, uva, limão, etc.)
-            - Bolos de Pote: sobremesas em pote com camadas de bolo e recheio cremoso
-
-            INFORMAÇÕES IMPORTANTES:
-            - Entregas apenas em Brasília/DF (NÃO mencione Planaltina como área de entrega — apenas Brasília)
-            - Foco de atendimento: Samambaia
-            - Pagamento via Pix
-            - Pedidos: cliente escolhe no cardápio, adiciona ao carrinho e finaliza com nome + contato
-            - Telefone: (61) 99279-6430
-            - E-mail: yanpietro0101@gmail.com
-            - Todo lucro apoia a causa da Igreja do Reino
-
-            REGRAS IMPORTANTES:
-            - Seja sempre gentil, use emojis com moderação (máximo 2 por resposta)
-            - Responda em português do Brasil
-            - Para pedidos: oriente a usar o botão 'Ver Cardápio' na página
-            - Não invente preços — diga para verificar no cardápio do site
-            - Respostas curtas e diretas (máximo 3 parágrafos curtos)
-            - Se não souber algo específico, peça para entrar em contato pelo WhatsApp (61) 99279-6430
-            - NUNCA diga que é uma IA do Google ou Gemini — você é a assistente da ReinoGourmet""";
+    @Value("${groq.api.model:llama-3.3-70b-versatile}")
+    private String groqModel;
 
     @PostMapping("/api/chat-proxy.php")
-    public ResponseEntity<Object> proxy(@RequestBody(required = false) String rawBody) {
-        if (geminiApiKey == null || geminiApiKey.isBlank()) {
-            return error("GEMINI_API_KEY não configurada. Defina no arquivo .env.", 500);
-        }
-
-        JsonNode input;
-        try {
-            input = mapper.readTree(rawBody == null ? "{}" : rawBody);
-        } catch (Exception e) {
-            return error("Dados inválidos", 400);
-        }
-
-        if (input == null || !input.has("messages") || !input.get("messages").isArray()) {
-            return error("Dados inválidos", 400);
-        }
-
-        ArrayNode messages = (ArrayNode) input.get("messages");
-        int from = Math.max(0, messages.size() - 12);
-
-        ArrayNode contents = mapper.createArrayNode();
-        for (int i = from; i < messages.size(); i++) {
-            JsonNode msg = messages.get(i);
-            String role = "assistant".equals(msg.path("role").asText()) ? "model" : "user";
-            ObjectNode contentEntry = mapper.createObjectNode();
-            contentEntry.put("role", role);
-            ArrayNode parts = mapper.createArrayNode();
-            ObjectNode part = mapper.createObjectNode();
-            part.put("text", msg.path("content").asText(""));
-            parts.add(part);
-            contentEntry.set("parts", parts);
-            contents.add(contentEntry);
-        }
-
-        while (!contents.isEmpty() &&
-               !"user".equals(contents.get(0).path("role").asText())) {
-            contents.remove(0);
-        }
-
-        if (contents.isEmpty()) {
-            return error("Histórico inválido", 400);
-        }
-        
-        ObjectNode payload = mapper.createObjectNode();
-        ObjectNode systemInstruction = mapper.createObjectNode();
-        ArrayNode sysParts = mapper.createArrayNode();
-        ObjectNode sysPart = mapper.createObjectNode();
-        sysPart.put("text", SYSTEM_PROMPT);
-        sysParts.add(sysPart);
-        systemInstruction.set("parts", sysParts);
-        payload.set("system_instruction", systemInstruction);
-        payload.set("contents", contents);
-        ObjectNode genConfig = mapper.createObjectNode();
-        genConfig.put("maxOutputTokens", 400);
-        genConfig.put("temperature", 0.7);
-        payload.set("generationConfig", genConfig);
-
-        String url = "https://generativelanguage.googleapis.com/v1beta/models/"
-                + geminiModel + ":generateContent?key=" + geminiApiKey;
+    public ResponseEntity<?> chat(@RequestBody JsonNode request) {
 
         try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .timeout(Duration.ofSeconds(30))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload)))
-                    .build();
-
-            HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
-
-            JsonNode geminiData = mapper.readTree(response.body());
-            if (response.statusCode() != 200 || !geminiData.has("candidates")
-                    || geminiData.get("candidates").isEmpty()) {
-                String details = geminiData.path("error").path("message").asText("Resposta inesperada");
-                Map<String, Object> body = new LinkedHashMap<>();
-                body.put("error", "Erro na API Gemini");
-                body.put("details", details);
-                return ResponseEntity.status(response.statusCode() != 200 ? response.statusCode() : 500).body(body);
+            if (groqApiKey == null || groqApiKey.isBlank()) {
+                return error(
+                        "GROQ_API_KEY não configurada",
+                        "Configure GROQ_API_KEY no Render.",
+                        HttpStatus.INTERNAL_SERVER_ERROR
+                );
             }
 
-            String text = geminiData.at("/candidates/0/content/parts/0/text").asText("");
-            if (text.isEmpty()) {
-                return error("Resposta vazia da IA", 500);
+            JsonNode incomingMessages = request.path("messages");
+
+            if (!incomingMessages.isArray() || incomingMessages.isEmpty()) {
+                return error(
+                        "Histórico inválido",
+                        "Nenhuma mensagem foi enviada.",
+                        HttpStatus.BAD_REQUEST
+                );
             }
 
-            Map<String, Object> textPart = Map.of("type", "text", "text", text);
-            return ResponseEntity.ok(Map.of("content", List.of(textPart)));
+            ArrayNode messages = objectMapper.createArrayNode();
+
+            // Personalidade do assistente
+            ObjectNode systemMessage = objectMapper.createObjectNode();
+            systemMessage.put("role", "system");
+            systemMessage.put(
+                    "content",
+                    """
+                    Você é a assistente virtual da Doces do Reino.
+
+                    Responda sempre em português do Brasil.
+                    Seja simpática, educada e objetiva.
+
+                    Ajude o cliente com:
+                    - produtos
+                    - preços
+                    - pedidos
+                    - Pix
+                    - contato
+                    - dúvidas sobre a loja
+
+                    Não invente informações que não foram fornecidas.
+                    Se não souber algo específico da loja, oriente o cliente
+                    a entrar em contato pelo WhatsApp.
+                    """
+            );
+
+            messages.add(systemMessage);
+
+            // Converte o histórico recebido pelo frontend
+            for (JsonNode item : incomingMessages) {
+
+                String role = item.path("role").asText("");
+                String content = item.path("content").asText("");
+
+                if (content.isBlank()) {
+                    continue;
+                }
+
+                // Groq aceita: user / assistant / system
+                if (!role.equals("user")
+                        && !role.equals("assistant")
+                        && !role.equals("system")) {
+                    continue;
+                }
+
+                ObjectNode msg = objectMapper.createObjectNode();
+                msg.put("role", role);
+                msg.put("content", content);
+
+                messages.add(msg);
+            }
+
+            if (messages.size() <= 1) {
+                return error(
+                        "Histórico inválido",
+                        "Nenhuma mensagem válida encontrada.",
+                        HttpStatus.BAD_REQUEST
+                );
+            }
+
+            ObjectNode body = objectMapper.createObjectNode();
+
+            body.put("model", groqModel);
+            body.set("messages", messages);
+            body.put("temperature", 0.7);
+            body.put("max_tokens", 800);
+
+            HttpHeaders headers = new HttpHeaders();
+
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(groqApiKey);
+
+            HttpEntity<String> entity = new HttpEntity<>(
+                    objectMapper.writeValueAsString(body),
+                    headers
+            );
+
+            String url =
+                    "https://api.groq.com/openai/v1/chat/completions";
+
+            ResponseEntity<String> groqResponse =
+                    restTemplate.exchange(
+                            url,
+                            HttpMethod.POST,
+                            entity,
+                            String.class
+                    );
+
+            JsonNode json =
+                    objectMapper.readTree(groqResponse.getBody());
+
+            String resposta =
+                    json.path("choices")
+                            .path(0)
+                            .path("message")
+                            .path("content")
+                            .asText("");
+
+            if (resposta.isBlank()) {
+                return error(
+                        "Resposta vazia da Groq",
+                        json.toString(),
+                        HttpStatus.BAD_GATEWAY
+                );
+            }
+
+            Map<String, Object> result = new HashMap<>();
+
+            // Mantenho "reply" para facilitar seu frontend
+            result.put("reply", resposta);
+
+            return ResponseEntity.ok(result);
+
+        } catch (HttpClientErrorException e) {
+
+            return error(
+                    "Erro na API Groq",
+                    e.getResponseBodyAsString(),
+                    HttpStatus.BAD_REQUEST
+            );
 
         } catch (Exception e) {
-            Map<String, Object> body = new LinkedHashMap<>();
-            body.put("error", "Chamada externa bloqueada ou falhou.");
-            body.put("dica", "Verifique a rede do container e a validade da GEMINI_API_KEY.");
-            return ResponseEntity.status(500).body(body);
+
+            return error(
+                    "Erro interno",
+                    e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
     }
 
-    private ResponseEntity<Object> error(String message, int code) {
-        return ResponseEntity.status(HttpStatus.valueOf(code)).body(Map.of("error", message));
+    @RequestMapping(
+            value = "/api/chat-proxy.php",
+            method = RequestMethod.OPTIONS
+    )
+    public ResponseEntity<Void> options() {
+        return ResponseEntity.ok().build();
+    }
+
+    private ResponseEntity<Map<String, String>> error(
+            String error,
+            String details,
+            HttpStatus status
+    ) {
+
+        Map<String, String> body = new HashMap<>();
+
+        body.put("error", error);
+        body.put("details", details == null ? "" : details);
+
+        return ResponseEntity.status(status).body(body);
     }
 }
