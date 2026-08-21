@@ -1,0 +1,19 @@
+# Variáveis de ambiente
+.env
+
+# Java / Maven
+target/
+*.class
+*.jar
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
