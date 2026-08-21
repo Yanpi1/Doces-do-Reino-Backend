@@ -28,10 +28,10 @@ public class ChatProxyController {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${groq.api.key:}")
-    private String groqApiKey;
+        private String groqApiKey;
 
     @Value("${groq.api.model:llama-3.3-70b-versatile}")
-    private String groqModel;
+        private String groqModel;
 
     @PostMapping("/api/chat-proxy.php")
     public ResponseEntity<?> chat(@RequestBody JsonNode request) {
