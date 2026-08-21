@@ -13,7 +13,7 @@
 
 // ── Sua chave da API Google Gemini ────────────────────
 // Definida via variável de ambiente GEMINI_API_KEY (ver docker-compose.yml / .env)
-define('GEMINI_API_KEY', getenv('GEMINI_API_KEY') ?: '');
+define('GEMINI_API_KEY', getenv('AIzaSyBElfhu5Pl7Msx0GocLQv0EwbKCKViRWts') ?: '');
 // ──────────────────────────────────────────────────────
 
 define('GEMINI_MODEL', 'gemini-1.5-flash');
