@@ -98,10 +98,15 @@ public class ChatProxyController {
             contents.add(contentEntry);
         }
 
-        if (contents.isEmpty() || !"user".equals(contents.get(0).path("role").asText())) {
-            return error("Histórico inválido", 400);
+        while (!contents.isEmpty() &&
+               !"user".equals(contents.get(0).path("role").asText())) {
+            contents.remove(0);
         }
 
+        if (contents.isEmpty()) {
+            return error("Histórico inválido", 400);
+        }
+        
         ObjectNode payload = mapper.createObjectNode();
         ObjectNode systemInstruction = mapper.createObjectNode();
         ArrayNode sysParts = mapper.createArrayNode();
